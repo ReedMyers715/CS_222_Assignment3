@@ -1,16 +1,20 @@
 def Main():
-    with open("students.txt", "r") as file:
-        for line in file:
-            if line != "\n":
-                if line.endswith("\n"):
-                    line = line[:-1]
-                else:
-                    parts = line.split(",")
-                    studentId = parts[0]
-                    lastName = parts[1]
-                    firstName = parts[2]
-                    major = parts[3]
-                    gpa = parts[4]
+    students = {}
+    file = open("students.txt", "r")
+    for line in file:
+        if line.endswith("\n"):
+            line = line[:-1]
+                
+        parts = line.split(",")
+        studentId = parts[0]
+        lastName = parts[1]
+        firstName = parts[2]
+        major = parts[3]
+        gpa = parts[4]
+
+        students[studentId] = [lastName, firstName, major, gpa]
+    file.close()
+
     while True:
         print("Choose an option: ")
         print("1) Search by Last Name")
@@ -18,7 +22,23 @@ def Main():
         print("3) Quit")
         answer = int(input("Enter your choice: "))
         if answer == 1:
-            lastname = input("Enter last name: ").split()
-                
-                
+            searchLastName = input("Enter last name: ")
+            for studentId in students:
+                info = students[studentId]
+                if info[0] == searchLastName:
+                    print(studentId, info[0], info[1], info[2], info[3])
+        
+        if answer == 2:
+            searchMajor = input("Enter major: ")
+            for studentId in students:
+                info = students[studentId]
+                if info[2] == searchMajor:
+                    print(studentId, info[0], info[1], info[2], info[3])
+
+        if answer == 3:
+            print("quitting now")
+            break
 Main()
+
+                
+                
