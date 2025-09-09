@@ -38,6 +38,9 @@ def Main():
         if answer == 3:
             print("quitting now")
             break
+
+        if answer > 3:
+            print("Invalid Choice")
 Main()
 
                 
